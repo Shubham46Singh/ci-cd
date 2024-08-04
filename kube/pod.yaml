@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cicd-pod
+spec:
+  containers:
+    - name: cicd-container
+      image: hangrysingh/python-flask-demo:latest
+      ports:
+        - containerPort: 5000
+  imagePullSecrets:
+    - name: docker-secrets
