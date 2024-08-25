@@ -5,7 +5,7 @@ metadata:
   labels:
     app: ci-cd-app
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: ci-cd-app
@@ -19,30 +19,37 @@ spec:
         image: hangrysingh/python-flask-demo:latest
         ports:
         - containerPort: 5000
-        # resources:
-        #   requests:
-        #     cpu: "0.5"
-        #     memory: 1Gi
-        #   limits:
-        #     cpu: "0.5"
-        #     memory: 1Gi
-        livenessProbe:
-          httpGet:
-            path: /k8s
-            port: 5000
-          initialDelaySeconds: 5
-          periodSeconds: 20
-        readinessProbe:
-          httpGet:
-            path: /k8s
-            port: 5000
-          initialDelaySeconds: 5
-          periodSeconds: 20
-        startupProbe:
-          httpGet:
-            path: /k8s
-            port: 5000
-          initialDelaySeconds: 5
-          periodSeconds: 20
+        # volumeMounts:
+        #   - mountPath: /app/data
+        #     name: ci-cd-storage
+        resources:
+          requests:
+            cpu: "0.5"
+            memory: 1Gi
+          limits:
+            cpu: "0.5"
+            memory: 1Gi
+        # livenessProbe:
+        #   httpGet:
+        #     path: /k8s
+        #     port: 5000
+        #   initialDelaySeconds: 5
+        #   periodSeconds: 20
+        # readinessProbe:
+        #   httpGet:
+        #     path: /k8s
+        #     port: 5000
+        #   initialDelaySeconds: 5
+        #   periodSeconds: 20
+        # startupProbe:
+        #   httpGet:
+        #     path: /k8s
+        #     port: 5000
+        #   initialDelaySeconds: 5
+        #   periodSeconds: 20
+      # volumes:
+      #   - name: ci-cd-storage
+      #     persistentVolumeClaim:
+      #       claimName: ci-cd-pvc
       imagePullSecrets:
       - name: docker-secrets
