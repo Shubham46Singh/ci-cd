@@ -1,0 +1,6 @@
+# Create Config map from commandline while provinding the configs 
+kubectl create configmap ci-cd-configmap --from-literal=WELCOME_MESSAGE="Welcome to the world of Kubernetes from ConfigMap!"
+# Providing the config from a file 
+kubectl create configmap ci-cd-configmap --from-file=config.properties
+# Providing a config from a directory
+kubectl create configmap my-config --from-file=./config-directory/

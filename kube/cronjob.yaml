@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: simple-cronjob
 spec:
-  schedule: "*/5 * * * *"
+  schedule: "*/1 * * * *"
   jobTemplate:
     spec:
       template:
@@ -11,5 +11,5 @@ spec:
           containers:
           - name: simple-container
             image: busybox
-            command: ["echo", "This is a CronJob running every 5 minutes"]
+            command: ["echo", "This is a CronJob running every 1 minutes"]
           restartPolicy: OnFailure
